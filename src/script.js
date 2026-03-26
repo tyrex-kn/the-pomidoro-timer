@@ -1,17 +1,61 @@
-const startTime = 25 * 60; // 30 минут в секундах
+const startTime = 30 * 60; // 30 минут в секундах
+const urlSVG = {
+    start: 'assets/play.svg',
+    stop: 'assets/stop.svg',
+};
+
 let timeLeft = startTime; 
-let timerId = null;
+let timerId = null; // state of timer
+
+const timerBtn = document.getElementById('timer-button')
+const iconBtn = document.getElementById('icon-btn')
+const btnReset = document.getElementById('btn-reset');
 
 const display = document.getElementById('display');
-const btnStart = document.getElementById('btn-start');
-const btnStop = document.getElementById('btn-stop');
-const btnReset = document.getElementById('btn-reset');
+const timerDisplay = document.getElementById('timer-display')
+
+const clickHoldAudio = new Audio("./assets/audio/soundclick.hold.AAC");
+clickHoldAudio.volume = 0.1;
+
+const clickOutAudio = new Audio("./assets/audio/soundclick.out.AAC");
+clickOutAudio.volume = 0.3;
+
 const endAudio = new Audio("./assets/audio/endsound.AAC")
 
-// const typeClass ={
-//     hide:'hide',
-//     show:'show',
-// }
+timerBtn.addEventListener('mousedown', (event) => {
+    event.button === 0 ? clickHoldAudio.play() : null;
+})
+
+// window.addEventListener('mouseup', (event) =>{
+//     clickOutAudio.play()
+// })
+
+
+function timePlayer(){
+    clickOutAudio.play()
+    if (timerId === null) {
+        startTimer();
+        iconBtn.classList.remove('start')
+        iconBtn.classList.add('stop')
+        timerBtn.classList.add('small', 'opacity-low')
+        timerDisplay.style.fontSize = '50px'
+        timerDisplay.style.setProperty('margin-bottom', '-10px')
+        // iconBtn.classList.add('small')
+        iconBtn.src = urlSVG.stop; 
+    } 
+    else {
+        stopTimer(timerId)
+        timerId = null;
+        iconBtn.classList.add('start')
+        iconBtn.classList.remove('stop')
+        timerBtn.classList.remove('small', 'opacity-low')
+        timerDisplay.style.fontSize = '40px'
+        timerDisplay.style.setProperty('margin-bottom', '0')
+        // iconBtn.classList.remove('small')
+        iconBtn.src = urlSVG.start;
+    }
+
+}
 
 function updateDisplay() {
     const minutes = Math.floor(timeLeft / 60);
@@ -20,23 +64,15 @@ function updateDisplay() {
 }
 
 function startTimer() {
-    if (timerId !== null) return;
-
-    // btnStart.classList.remove('show')
-    btnStart.classList.add('hide')
-    btnStop.classList.remove('hide')
-    // btnStop.classList.add('show')
     timerId = setInterval(() => {
-        
         if (timeLeft > 0) {
             timeLeft--;
             updateDisplay();
-        
         } else {
-            endAudio.play();
             clearInterval(timerId);
             timerId = null;
-            btnStop.classList.add('hide');
+            // btnStop.classList.add('hide');
+            timerBtn.classList.add('hide')
             btnReset.classList.remove('hide')
         }
     }, 1000);
@@ -44,13 +80,10 @@ function startTimer() {
     
 }
 
-function stopTimer() {
-    clearInterval(timerId);
+function stopTimer(ti) {
+    clearInterval(ti);
     timerId = null;
-    // btnStop.classList.remove('show')
-    btnStop.classList.add('hide');
-    btnStart.classList.remove('hide');
-    // btnStart.classList.add('show');
+
     Math.floor(timeLeft / 60) < 30 ? btnReset.classList.remove('hide') : null;
 }
 
@@ -59,5 +92,9 @@ function resetTimer() {
     timeLeft = startTime;
     updateDisplay();
     btnReset.classList.add('hide')
-    if (btnStart.classList.contains('hide')) btnStart.classList.remove('hide')
+    if (timerBtn.classList.contains('hide')) timerBtn.classList.remove('hide')
+}
+
+function playSoundClick (){
+   
 }

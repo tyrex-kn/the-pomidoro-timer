@@ -9,10 +9,11 @@
 <body>
     <div class="tomato">
         <div class="timer" id="timer">
-            <div class="timer-display" ><span id="display">30:00</span></div>
+            <div class="timer-display" id="timer-display"><span id="display">30:00</span></div>
             <div class="button-section">
-                <button id="btn-start" onclick="startTimer()"><img src="assets/play.svg" alt="Start"></button>
-                <button id="btn-stop" class="hide" onclick="stopTimer()"><img src="assets/stop.svg" alt="stop"></button>
+                <button id="timer-button" onclick="timePlayer()"><img id="icon-btn" class="start" src="assets/play.svg" alt="Start"></button>
+                <!-- <button id="btn-start" onclick="startTimer()"><img src="assets/play.svg" alt="Start"></button> -->
+                <!-- <button id="btn-stop" class="hide" onclick="stopTimer()"><img src="assets/stop.svg" alt="stop"></button> -->
                 <button class="hide" id="btn-reset" onclick="resetTimer()">RESET</button>
             </div>
         </div>

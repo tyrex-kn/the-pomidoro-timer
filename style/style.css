@@ -9,11 +9,6 @@
     /* animation-delay: -2.5s; */
 /* } */
 
-*{
-  box-sizing: border-box;
-}
-
-
 body {
   margin: 0;
   user-select: none;
@@ -38,7 +33,6 @@ body {
     flex-direction: column;
 } 
 
-
 .button-section{
     -webkit-app-region: no-drag;
     display: flex;
@@ -46,7 +40,6 @@ body {
     width:100%;
     justify-content: center;
     gap: 5px;
-
 }
 
 .timer-display{
@@ -55,6 +48,7 @@ body {
     font-size: 40px;
     width: 100vw;
     text-align: center;
+    transition: font-size 0.2s ease-out;
 }
 
 
@@ -73,40 +67,48 @@ button{
     color: white;
     font-family:monospace;
     cursor:pointer;
-    transition: background-color 0.1s ease-in-out;
-
+    transition: 
+        background-color 0.1s ease-in-out, 
+        scale 0.05s ease-in,
+        opacity 0.1s ease-in-out
+    ;
     height: var(--btn-size);
     width: var(--btn-size);
     border-radius: 100px;
 }
+
 
 button:hover{
     background-color: var(--timer-background-hover);
 }
 
-/* .button-section button{
-    height: var(--btn-size);
-    width: var(--btn-size);
-    border-radius: 100px;
-} */
-
-.button-section img{
+#timer-button img{
     height: calc(var(--btn-size) / 2.6);
-    position: relative;  
-
+    position: relative; 
 }
 
-#btn-start img{
-    top: 2px;
+#timer-button:active{
+    scale: 0.8;
+}
+
+.start{
+    top:1.5px;
     left: 1px;
 }
-
-#btn-stop img{
-    top: 2px;
+.stop{
+    top: 1.5px;
 }
 
-#btn-start>img, #btn-stop>img{
-    background-size: cover;
+.small{
+    scale: 0.7;
+}
+
+.opacity-low{
+    opacity: 0.5;
+}
+
+.opacity-low:hover{
+    opacity: 0.6;
 }
 
 #btn-reset{
@@ -126,7 +128,6 @@ button:hover{
 #shadow{
     fill:var(--shadow)
 }
-
 
 .hide{
     display: none;
