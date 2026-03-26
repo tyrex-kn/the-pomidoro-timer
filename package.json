@@ -1,0 +1,15 @@
+{
+  "name": "20tomato",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "duda.kn",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^39.2.7"
+  }
+}

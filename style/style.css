@@ -1,0 +1,134 @@
+@import url("./property.css");
+
+/* :root{ */
+    /* animation-name: tomato-color-anim; */
+    /* animation-duration: 5s; */
+    /* animation-iteration-count: infinite; */
+    /* transition: background-color 0.5 ease-in-out, color 0.5 ease-in-out; */
+    /* animation-timing-function: ease-in; */
+    /* animation-delay: -2.5s; */
+/* } */
+
+*{
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.tomato{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: end;
+    anchor-name: --tomato;
+}
+
+.timer{
+    position: absolute;
+    position-anchor: --tomato;
+    position-area: center center;
+    top:48px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+} 
+
+
+.button-section{
+    -webkit-app-region: no-drag;
+    display: flex;
+    z-index: 3;
+    width:100%;
+    justify-content: center;
+    gap: 5px;
+
+}
+
+.timer-display{
+    color:black;
+    font-family: 'TomatoFont', serif;
+    font-size: 40px;
+    width: 100vw;
+    text-align: center;
+}
+
+
+#green{
+    position: absolute;
+    position-anchor: --tomato;
+    position-area: center center;
+    bottom: 130px;
+    z-index: 1;
+    width: 80%;
+} 
+
+button{
+    background-color: var(--timer-background);
+    border:none;
+    color: white;
+    font-family:monospace;
+    cursor:pointer;
+    transition: background-color 0.1s ease-in-out;
+
+    height: var(--btn-size);
+    width: var(--btn-size);
+    border-radius: 100px;
+}
+
+button:hover{
+    background-color: var(--timer-background-hover);
+}
+
+/* .button-section button{
+    height: var(--btn-size);
+    width: var(--btn-size);
+    border-radius: 100px;
+} */
+
+.button-section img{
+    height: calc(var(--btn-size) / 2.6);
+    position: relative;  
+
+}
+
+#btn-start img{
+    top: 2px;
+    left: 1px;
+}
+
+#btn-stop img{
+    top: 2px;
+}
+
+#btn-start>img, #btn-stop>img{
+    background-size: cover;
+}
+
+#btn-reset{
+    font-size: 10px;
+    font-family: 'ResetFont', serif;
+}
+
+#main_color{
+    fill:var(--main-color);
+    /* animation: tomato-color-body 2s infinite ease-in-out */
+}
+
+#highlight{
+    fill: var(--highlight)
+}
+
+#shadow{
+    fill:var(--shadow)
+}
+
+
+.hide{
+    display: none;
+}
+

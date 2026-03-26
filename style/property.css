@@ -1,0 +1,42 @@
+:root{
+    /*************************red*/
+        --main-color:#e22028;
+        --highlight: #ea5658;
+        --shadow: #cc2128;
+        --timer-background:#a01318;
+        --timer-background-hover:#700e11;
+
+    /*************************green*/
+        --main-color-g:#26c421;
+        --highlight-g: #68d852;
+        --shadow-g: #22b61d;
+        --timer-background-g:#119111;
+        --timer-background-hover-g:#15640b;
+
+    --btn-size:36px;
+
+}
+
+@font-face {
+    font-family: 'TomatoFont'; /* Название для использования */
+    src: url('../assets/font/WinkySans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ResetFont'; /* Название для использования */
+    src: url('../assets/font/Datatype-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+@keyframes tomato-color-body{
+    from{
+        fill:var(--main-color-g)
+    }
+    to{
+        fill:var(--main-color)
+    }
+}
