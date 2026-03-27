@@ -13,9 +13,16 @@
         --timer-background-g:#119111;
         --timer-background-hover-g:#15640b;
 
-    --btn-size:36px;
+        /* --btn-size:36px; */
 
 }
+
+@property --btn-size{
+    syntax: "<length>";
+    inherits: false;
+    initial-value: 36px;
+}
+
 
 @font-face {
     font-family: 'TomatoFont'; /* Название для использования */
@@ -40,3 +47,4 @@
         fill:var(--main-color)
     }
 }
+
