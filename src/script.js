@@ -1,4 +1,4 @@
-const startTime = 30 * 60; // 30 минут в секундах
+const startTime = 0.1 * 60; // 25 minute in seconds
 const urlSVG = {
     start: 'assets/play.svg',
     stop: 'assets/stop.svg',
@@ -30,33 +30,10 @@ const endAudio = new Audio("./assets/audio/endsound.AAC");
         event.button === 0 ? clickHoldAudio.play() : null;
     })
 });
-// btnReset.addEventListener('mousedown', (event) => {
-//     event.button === 0 ? clickHoldAudio.play() : null;
-// })
-
-
 
 function timePlayer(){
     clickOutAudio.play();
     const isRun = timerId === null
-    // if (timerId === null) {
-    //     startTimer();
-    //     iconBtn.src = urlSVG.stop; 
-    //     iconBtn.classList.replace('start', 'stop');
-    //     timerBtn.classList.add('opacity-low');
-    //     // timerBtn.style.scale = '0.7';
-    //     timerDisplay.style.fontSize = '50px';
-    //     timerDisplay.style.marginBottom = '-10px';
-    // } 
-    // else {
-    //     stopTimer()
-    //     iconBtn.src = urlSVG.start;
-    //     iconBtn.classList.replace('stop', 'start');
-    //     timerBtn.classList.remove('opacity-low');
-    //     timerBtn.style.scale = '1';
-    //     timerDisplay.style.fontSize = '40px';
-    //     timerDisplay.style.marginBottom = '0px';
-    // }
 
     if(isRun){
         startTimer();
@@ -79,13 +56,15 @@ function stopTimer() {
 }
 
 function resetTimer() {
+    btnReset.classList.add('hide')
+    if(timerBtn.classList.contains('hide')){
+        timerBtn.classList.remove('hide', 'small', 'opacity-low');
+        iconBtn.src = urlSVG.start;
+    }
     clickResetAudio.play();
     stopTimer();
     timeLeft = startTime;
     updateDisplay();
-    btnReset.classList.add('hide')
-    // if(timerBtn.classList.contains('hide')) ? timerBtn.classList.remove('hide')
-    // timerBtn.classList.toggle('hide')
 }
 
 function updateDisplay() {
@@ -100,14 +79,14 @@ function startTimer() {
             timeLeft--;
             updateDisplay();
         } else {
+            endAudio.play()
             clearInterval(timerId);
             timerId = null;
             timerBtn.classList.add('hide');
             btnReset.classList.remove('hide');
+            timerDisplay.classList.remove('timer-running');
         }
     }, 1000);
     if(!btnReset.classList.contains('hide')) btnReset.classList.add('hide')
-    // btnReset.classList.toggle('hide')
-    // !btnReset.classList.contains('hide') ? btnReset.classList.add('hide') : null;
 }
 
