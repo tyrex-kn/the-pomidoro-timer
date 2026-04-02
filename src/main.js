@@ -8,6 +8,7 @@ function createWindow () {
     resizable: false,
     maximizable: false,
     fullscreenable: false,
+    backgroundThrottling: false,
     frame: false, 
     transparent: true,
     background: "#00000000",

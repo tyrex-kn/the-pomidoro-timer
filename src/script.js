@@ -4,8 +4,10 @@ const urlSVG = {
     stop: 'assets/stop.svg',
 };
 
+let timeNow = null;
 let timeLeft = startTime; 
-let timerId = null; // state of timer
+let timeState = null; // state of timer
+let timeReminder = 1; // reminder of timeLeft befor Stop function
 
 //color
 const tomatoData = [
@@ -49,15 +51,11 @@ const tomatoData = [
 
 const animateProperty = {
     duration: (startTime * 1000),        
-    iterations: Infinity,
-    direction: 'alternate',
-    fill: 'forwards',
-    easing: 'ease-in-out',
+    iterations: 1,
+    direction: 'normal',
+    fill: 'both',
+    easing: 'linear',
 }
-
-// const mainColor = document.getElementById('main_color');
-// const highlightColor = document.getElementById('highlight');
-// const shadowColor = document.getElementById('shadow')
 
 //buttons
 const timerBtn = document.getElementById('timer-button')
@@ -81,6 +79,7 @@ clickResetAudio.volume = 0.5;
 const endAudio = new Audio("./assets/audio/endsound.AAC");
 
 // prepare events
+
 [btnReset,timerBtn].forEach(btn => {
     btn.addEventListener('mousedown', (event) => {
         event.button === 0 ? clickHoldAudio.play() : null;
@@ -126,14 +125,13 @@ const arrAnimation = tomatoData.map((item) => {
 //main player
 function timePlayer(){
     clickOutAudio.play();
-    const isRun = timerId === null
+    
+    const isRun = (timeState === null)
 
     if(isRun){
         startTimer();
-        arrAnimation.forEach(anim => anim.play())
     }else{
         stopTimer();
-        arrAnimation.forEach(anim => anim.pause())
     };
 
     iconBtn.src = isRun ? urlSVG.stop : urlSVG.start;
@@ -145,35 +143,21 @@ function timePlayer(){
   }
 
 //manipulation with timer
-function stopTimer() {
-    clearInterval(timerId);
-    timerId = null;
-    if(Math.floor(timeLeft / 60) < 30) btnReset.classList.remove('hide')
-}
-
-function resetTimer() {
-    clickResetAudio.play();
-    arrAnimation.forEach(anim => anim.currentTime = 0)  
-    stopTimer();
-    timeLeft = startTime;
-    updateDisplay();
-    btnReset.classList.add('hide')
-    if(timerBtn.classList.contains('hide')){
-        timerBtn.classList.remove('hide', 'small', 'opacity-low');
-        iconBtn.src = urlSVG.start;
-    }
-}
-
 function startTimer() {
-    timerId = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--;
-            updateDisplay();
+    let timeEnd = (Date.now() + (timeLeft * 1000)); // end in mlsecond
+
+    timeState = setInterval(() => {
+        if (timeReminder > 0) {
+            timeNow = Date.now()
+            timeReminder = Math.ceil((timeEnd - timeNow) / 1000);
+            arrAnimation.forEach(anim => anim.currentTime = (startTime - timeReminder)*1000)
+            updateDisplay(timeReminder);
         } else {
             endAudio.play()
             arrAnimation.forEach(anim => anim.pause())
-            clearInterval(timerId);
-            timerId = null;
+            clearInterval(timeState);
+            
+            timeState = null;
             timerBtn.classList.add('hide');
             btnReset.classList.remove('hide');
             timerDisplay.classList.remove('timer-running');
@@ -182,10 +166,40 @@ function startTimer() {
     if(!btnReset.classList.contains('hide')) btnReset.classList.add('hide')
 }
 
-// math for display
-function updateDisplay() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    display.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+function stopTimer(remind = timeReminder, end = false) {
+    timeLeft = remind;
+    arrAnimation.forEach((anim) =>{
+        anim.pause();
+        anim.currentTime = end ? 0 : (startTime - timeReminder)*1000;
+    })
+    clearInterval(timeState);
+    timeState = null;
+    if(Math.floor(timeLeft / 60) < startTime) btnReset.classList.remove('hide')
 }
 
+function resetTimer() {
+    clickResetAudio.play();
+
+    // reset time config
+    timeLeft = startTime;
+    timeNow = null;
+    timeReminder = 1;
+    
+    stopTimer(timeLeft, true);
+    updateDisplay(timeLeft);
+
+    btnReset.classList.add('hide')
+    if(timerBtn.classList.contains('hide')){
+        timerBtn.classList.remove('hide', 'small', 'opacity-low');
+        iconBtn.src = urlSVG.start;
+    }
+}
+
+// math for display
+function updateDisplay(timeR) {
+    const minutes = Math.floor(timeR / 60);
+    const seconds = timeR % 60;
+    const timeString = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    display.textContent = timeString;
+    document.title = `${timeString}`;
+}
