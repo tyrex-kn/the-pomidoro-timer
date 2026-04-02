@@ -13,31 +13,30 @@
         --timer-background:#119111;
         --timer-background-hover:#15640b;
 
-        /* --btn-size:36px; */
+        --btn-size:36px;
 
 }
 
-@property --btn-size{
+/* @property --btn-size{
     syntax: "<length>";
     inherits: false;
     initial-value: 36px;
-}
+} */
 
 
 @font-face {
-    font-family: 'TomatoFont'; /* Название для использования */
+    font-family: 'TomatoFont';
     src: url('../assets/font/WinkySans-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'ResetFont'; /* Название для использования */
+    font-family: 'ResetFont';
     src: url('../assets/font/Datatype-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-
 
 @keyframes tomato-color-body{
     from{

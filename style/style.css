@@ -1,14 +1,5 @@
 @import url("./property.css");
 
-/* :root{ */
-    /* animation-name: tomato-color-anim; */
-    /* animation-duration: 5s; */
-    /* animation-iteration-count: infinite; */
-    /* transition: background-color 0.5 ease-in-out, color 0.5 ease-in-out; */
-    /* animation-timing-function: ease-in; */
-    /* animation-delay: -2.5s; */
-/* } */
-
 body {
   margin: 0;
   user-select: none;
@@ -142,7 +133,6 @@ button:hover{
 
 .hide{
     opacity: 0;
-    /* visibility:hidden; */
     display: none;
 }
 
