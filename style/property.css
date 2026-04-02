@@ -1,17 +1,17 @@
 :root{
     /*************************red*/
-        --main-color:#e22028;
+        /* --main-color:#e22028;
         --highlight: #ea5658;
         --shadow: #cc2128;
         --timer-background:#a01318;
-        --timer-background-hover:#700e11;
+        --timer-background-hover:#700e11; */
 
     /*************************green*/
-        --main-color-g:#26c421;
-        --highlight-g: #68d852;
-        --shadow-g: #22b61d;
-        --timer-background-g:#119111;
-        --timer-background-hover-g:#15640b;
+        --main-color:#26c421;
+        --highlight: #68d852;
+        --shadow: #22b61d;
+        --timer-background:#119111;
+        --timer-background-hover:#15640b;
 
         /* --btn-size:36px; */
 

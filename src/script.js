@@ -166,11 +166,11 @@ function startTimer() {
     if(!btnReset.classList.contains('hide')) btnReset.classList.add('hide')
 }
 
-function stopTimer(remind = timeReminder, end = false) {
-    timeLeft = remind;
+function stopTimer(tRem = timeReminder) {
+    timeLeft = tRem !== 1 ? tRem : startTime;
     arrAnimation.forEach((anim) =>{
         anim.pause();
-        anim.currentTime = end ? 0 : (startTime - timeReminder)*1000;
+        anim.currentTime = timeReminder === 1 ? 0 : (startTime - timeReminder)*1000;
     })
     clearInterval(timeState);
     timeState = null;
@@ -185,7 +185,7 @@ function resetTimer() {
     timeNow = null;
     timeReminder = 1;
     
-    stopTimer(timeLeft, true);
+    stopTimer(timeLeft);
     updateDisplay(timeLeft);
 
     btnReset.classList.add('hide')
